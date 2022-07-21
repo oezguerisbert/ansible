@@ -4,13 +4,17 @@
     name: ["nodejs", "npm"]
 
 - name: npmjs prefix
+  become_user: oezguer
   shell: mkdir -p ~/.local/.npm-global
 
 - name: add npmjs to path
+  become_user: oezguer
   shell: PATH=~/.local/.npm-global/bin:$PATH
 
 - name: npmjs global settings
+  become_user: oezguer
   shell: npm config set prefix '~/.local/.npm-global'
 
 - name: npmjs global settings export path in case I don't have dotfiles installed
+  become_user: oezguer
   shell: export PATH=~/.local/.npm-global/bin:$PATH

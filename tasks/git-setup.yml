@@ -1,4 +1,5 @@
 - name: Git personal setup email
+  become_user: oezguer
   git_config:
     name: user.email
     scope: global
@@ -7,6 +8,7 @@
   - git-personal
 
 - name: Git personal setup name
+  become_user: oezguer
   git_config:
     name: user.name
     scope: global
@@ -15,6 +17,7 @@
   - git-personal
 
 - name: Git set main branch name
+  become_user: oezguer
   git_config:
     name: init.defaultBranch
     scope: global

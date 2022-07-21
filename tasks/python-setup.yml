@@ -11,4 +11,5 @@
     name: ["python3-venv", "python3-pip"]
 
 - name: python tools and formatters
+  become_user: oezguer
   shell: pip3 install pylint djhtml isort djlint black

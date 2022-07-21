@@ -1,24 +1,39 @@
 - name: Install ZSH
+  become: true
   apt: 
     name: ["zsh"]
     
 - name: Change shell to zsh
+  become: true
   shell: chsh -s $(which zsh)
 
 - name: Check that the somefile.conf exists
   stat:
-    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+    path: "~/.oh-my-zsh"
   register: oh_my_stats
 
 - name: Oh-My-Zsh
-  shell: "curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > {{ lookup('env', 'HOME') }}/.oh-my-installer && chmod +x {{ lookup('env', 'HOME') }}/.oh-my-installer && {{ lookup('env', 'HOME') }}/.oh-my-installer"
+  become_user: oezguer
+  shell: "curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer"
+  when: oh_my_stats.stat.exists == False
+
+- name: Oh-My-Zsh Prep
+  become_user: oezguer
+  shell: "chmod +x ~/.oh-my-installer"
+  when: oh_my_stats.stat.exists == False
+
+- name: Oh-My-Zsh Install
+  become_user: oezguer
+  shell: "~/.oh-my-installer"
   when: oh_my_stats.stat.exists == False
 
 - name: Install zsh-autosuggestions
+  become_user: oezguer
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/plugins/zsh-autosuggestions"
+    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
 
 - name: install zplug
-  shell: "sudo curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh"
+  become_user: oezguer
+  shell: "curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh"
 
