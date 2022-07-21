@@ -1,0 +1,6 @@
+- name: Install System Packages 
+  become: true
+  apt:
+    name: ["gettext", "rsync", "build-essential", "curl", "golang", "ninja-build", "python3-pip", "cmake", "pkg-config", "ripgrep", "unzip", "libtool", "libtool-bin", "fzf", "xclip"]
+    update_cache: true
+    state: present

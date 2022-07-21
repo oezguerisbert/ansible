@@ -1,0 +1,2 @@
+- name: Install Nvm
+  shell: npm install -g nvm yarn eslint typescript-language-server typescript ts-node prettier @fsouza/prettierd neovim pyright

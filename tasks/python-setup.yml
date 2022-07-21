@@ -1,0 +1,14 @@
+- name: Install python & python3
+  become: true
+  apt:
+    update_cache: true
+    name: ["python3"]
+
+- name:  Install pip and pip3
+  become: true
+  apt:
+    update_cache: true
+    name: ["python3-venv", "python3-pip"]
+
+- name: python tools and formatters
+  shell: pip3 install pylint djhtml isort djlint black
