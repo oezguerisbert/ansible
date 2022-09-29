@@ -22,7 +22,10 @@ return require('packer').startup(function(use)
   -- You can specify multiple plugins in a single call
   use {'tjdevries/colorbuddy.vim'}
 
-  use {'jose-elias-alvarez/null-ls.nvim', 'MunifTanjim/prettier.nvim'}
+  -- use {'jose-elias-alvarez/null-ls.nvim'}
+
+  use {'MunifTanjim/prettier.nvim'}
+
   use {'hrsh7th/nvim-cmp','hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path'}
 
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
